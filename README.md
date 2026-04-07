@@ -1,6 +1,6 @@
 # GedTidy – Genealogical Data Cleaner
 
-**GedTidy** ist ein Werkzeug zur Analyse und Normalisierung genealogischer **GEDCOM‑Dateien**.  
+**GedTidy**[^1] ist ein Werkzeug zur Analyse und Normalisierung genealogischer **GEDCOM‑Dateien**.  
 Es richtet sich an Anwenderinnen und Anwender, die bereits **ausreichende Kenntnisse des GEDCOM‑Standards** besitzen.  
 Ohne ein grundlegendes Verständnis der GEDCOM‑Struktur können Analyseergebnisse falsch interpretiert werden.
 
@@ -195,3 +195,10 @@ GedTidy befindet sich in aktiver Entwicklung. Die folgenden Ideen skizzieren mö
 
 - **Automatische Backups**  
   automatische Sicherung des Arbeitsstandes beim Export der normierten ged-Datei.
+
+
+
+[^1]: **GedTidy** setzt sich aus zwei Teilen zusammen:
+**GED** – die übliche Abkürzung für **GEDCOM**, das genealogische Datenaustauschformat  
+**Tidy** – englisch für **aufräumen**, **bereinigen**, **ordnen**
+Der Name bedeutet also sinngemäß: 👉 **„GEDCOM‑Dateien aufräumen und sauber machen“**
