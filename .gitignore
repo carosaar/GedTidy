@@ -1,0 +1,75 @@
+# ------------------------------------------------------------
+# Python: Bytecode, Cache, Build-Artefakte
+# ------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+*.egg-info/
+*.egg
+.eggs/
+*.manifest
+
+# ------------------------------------------------------------
+# Virtuelle Umgebungen
+# ------------------------------------------------------------
+.venv/
+venv/
+env/
+
+# ------------------------------------------------------------
+# IDE / Editor / OS Dateien
+# ------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ------------------------------------------------------------
+# Projekt-spezifische Build- und Distributionsordner
+# ------------------------------------------------------------
+build/
+dist/
+installer/
+DevDocs/
+
+# ------------------------------------------------------------
+# Log- und Debug-Dateien
+# ------------------------------------------------------------
+*.log
+*log.md
+
+# ------------------------------------------------------------
+# Temporäre Dateien & Arbeitsdateien
+# ------------------------------------------------------------
+*.tmp
+*.bak
+*.old
+
+# ------------------------------------------------------------
+# GEDCOM-Dateien
+# Standardmäßig ignorieren – außer Testdaten
+# ------------------------------------------------------------
+*.ged
+*.tidy
+*.zip
+
+# Testdaten explizit erlauben
+!testdata/
+!testdata/*.ged
+!testdata/*.tidy
+!testdata/*.zip
+
+# ------------------------------------------------------------
+# Dateien, die NICHT ignoriert werden dürfen
+# ------------------------------------------------------------
+!GedTidy.spec
+!README.md
+!CHANGELOG.md
+!LICENSE
+!requirements.txt
+!pyproject.toml
+!rootlauncher.py

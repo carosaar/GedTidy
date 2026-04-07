@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Step3_WriteOutput</class>
+ <widget class="QWidget" name="Step3_WriteOutput">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>461</width>
+    <height>742</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Step 3 – Bereinigte Datei erzeugen</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>14</number>
+   </property>
+   <item>
+    <widget class="QFrame" name="frame_summary">
+     <property name="styleSheet">
+      <string>
+        QFrame#frame_summary {
+          background-color: #f7f9fc;
+          border: 1px solid #d0d7e2;
+          border-radius: 6px;
+          padding: 12px;
+        }
+        QLabel {
+          font-size: 10pt;
+          color: #2a3f5f;
+        }
+        QLabel.heading {
+          font-weight: bold;
+          font-size: 11pt;
+        }
+      </string>
+     </property>
+     <layout class="QGridLayout" name="summaryGrid">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lbl_head_inputs">
+        <property name="styleSheet">
+         <string>font-weight: bold;</string>
+        </property>
+        <property name="text">
+         <string>Vorgaben</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lbl_tag">
+        <property name="text">
+         <string>TAG:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lbl_mode">
+        <property name="text">
+         <string>Modus:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="lbl_separator">
+        <property name="text">
+         <string>Trenner:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lbl_head_stats">
+        <property name="styleSheet">
+         <string>font-weight: bold;</string>
+        </property>
+        <property name="text">
+         <string>Statistik</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="lbl_total_occ">
+        <property name="text">
+         <string>Vorkommen gesamt:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="lbl_found_values">
+        <property name="text">
+         <string>Gefundene Werte:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="lbl_head_norm">
+        <property name="styleSheet">
+         <string>font-weight: bold;</string>
+        </property>
+        <property name="text">
+         <string>Normierung</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="lbl_norm_values">
+        <property name="text">
+         <string>Normwerte:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_preview">
+      <attribute name="title">
+       <string>Vorschau</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="previewLayout">
+       <item>
+        <widget class="QGroupBox" name="group_replacements">
+         <property name="title">
+          <string>🔄 Ersetzungstabelle</string>
+         </property>
+         <layout class="QVBoxLayout" name="tableLayout">
+          <item>
+           <widget class="QLineEdit" name="edit_filter_replacements">
+            <property name="placeholderText">
+             <string>🔍 Filtern…</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="table_replacements">
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+            <column>
+             <property name="text">
+              <string>Normwert (neu)</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>TAG‑Wert (alt)</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Vorkommen</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="table_sumLayout">
+            <item>
+             <widget class="QLabel" name="lbl_filtered_count">
+              <property name="text">
+               <string>Anzahl (gefiltert): 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Orientation::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbl_filtered_sum">
+              <property name="text">
+               <string>Ersetzungen (gefiltert): 0</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_log">
+      <attribute name="title">
+       <string>Protokoll</string>
+      </attribute>
+      <layout class="QVBoxLayout">
+       <item>
+        <widget class="QTextBrowser" name="md_preview">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>200</height>
+          </size>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="buttonLayout">
+     <item>
+      <spacer name="buttonSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_write">
+       <property name="styleSheet">
+        <string notr="true">
+         QPushButton {
+           background-color: #2a7ade;
+           color: white;
+           font-size: 12pt;
+           font-weight: bold;
+           border-radius: 6px;
+           padding: 6px 12px;
+         }
+         QPushButton:hover {
+           background-color: #1f5fb1;
+         }
+        </string>
+       </property>
+       <property name="text">
+        <string>📤 Bereinigte Datei erzeugen</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
