@@ -27,6 +27,12 @@ env/
 *.swo
 .DS_Store
 Thumbs.db
+*.bat
+*.cmd
+*.iss
+*.txt
+!requirements.txt
+!version.txt
 
 # ------------------------------------------------------------
 # Projekt-spezifische Build- und Distributionsordner
