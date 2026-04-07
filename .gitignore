@@ -31,8 +31,6 @@ Thumbs.db
 *.cmd
 *.iss
 *.txt
-!requirements.txt
-!version.txt
 
 # ------------------------------------------------------------
 # Projekt-spezifische Build- und Distributionsordner
@@ -79,3 +77,4 @@ DevDocs/
 !requirements.txt
 !pyproject.toml
 !rootlauncher.py
+!version.txt
