@@ -19,6 +19,12 @@ Ohne ein grundlegendes Verständnis der GEDCOM‑Struktur können Analyseergebni
 - Vollständig lokale Verarbeitung – **keine Datenübertragung**  
 - Windows‑Installer/Deinstaller inklusive Desktop‑Verknüpfung
 
+## 📖 Benutzerhandbuch und Testumgebung
+Das vollständige Benutzerhandbuch befindet sich im Ordner [`doc/`](doc/).  
+Es enthält eine ausführliche Beschreibung der Funktionen, Beispiele und Hinweise zur Nutzung von GedTidy.
+Eine Testdatei ist unter [`testdata/`](testdata/).
+-> [Handbuch](doc/HANDBUCH.md) 
+
 ---
 
 ## 🖥️ Systemvoraussetzungen
@@ -157,7 +163,7 @@ Entwickler können GedTidy direkt aus dem Quellcode kompilieren oder bei Bedarf 
 
 ## 📝 Lizenz
 
-Dieses Projekt steht unter der **MIT License**.  
+Dieses Projekt steht unter der [**MIT License**](LICENSE).
 Die Lizenz erlaubt freie Nutzung, Modifikation und Weitergabe,  
 **schließt jedoch jede Haftung aus**.
 
