@@ -2,6 +2,23 @@
 
 ## [Unreleased]
 
+## [1.0.1] – 2026‑04‑08
+### Geändert
+- Statusmeldungen im gesamten Programm vereinheitlicht  
+  - `update_status()` zeigt Meldungen nun mit Timeout (10 s) an  
+  - Statusmeldungen aus Schritt 1 und beim Import verschwinden automatisch  
+- Normwert‑Filterverhalten verbessert  
+  - aktuell ausgewählter Normwert bleibt sichtbar, auch wenn er nicht zum Filter passt  
+  - neu angelegte Normwerte werden ebenfalls angezeigt, unabhängig vom Filter  
+- UI‑Rückmeldungen erweitert  
+  - akustisches Signal beim Ein‑ und Ausblenden nicht passender Normwerte  
+  - Statusmeldungen informieren über temporär sichtbare bzw. ausgeblendete Normwerte (15s)
+
+### Behoben
+- unvollständige Methode `on_details_doubleclick()` korrigiert  
+  
+---
+
 ## [1.0.0] – 2026‑04‑07
 ### Hinzugefügt
 - Erste vollständige README.md mit Installationshinweisen, Systemvoraussetzungen und Projektstruktur

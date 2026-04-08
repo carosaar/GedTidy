@@ -84,7 +84,6 @@ class NormalizationModel:
     # Mittleres Fenster
     # ---------------------------------------------------------
     def get_norm_values(self):
-        """Liste aller Normwerte (unique), mit Anzahl & Summe."""
         norms = {}
 
         for item in self.items:
@@ -98,12 +97,19 @@ class NormalizationModel:
             norms[nv]["count_items"] += 1
             norms[nv]["sum_counts"] += item["count"]
 
-        # Filter anwenden
+        # gefilterte Liste
         result = [
             {"norm": nv, **data}
             for nv, data in norms.items()
             if self._matches_filter(nv, self.filter_norm)
         ]
+
+        # current_norm immer anzeigen
+        cn = self.current_norm
+        if cn and cn in norms:
+            if not any(entry["norm"] == cn for entry in result):
+                data = norms[cn]
+                result.append({"norm": cn, **data})
 
         return result
 

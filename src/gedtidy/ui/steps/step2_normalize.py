@@ -1,9 +1,36 @@
-from PySide6.QtWidgets import QWidget, QMessageBox, QAbstractItemView, QHeaderView
+from PySide6.QtWidgets import QWidget, QMessageBox, QAbstractItemView, QHeaderView, QApplication
 from PySide6.QtCore import Qt, QTimer, QSortFilterProxyModel
 from PySide6.QtGui import QStandardItemModel, QStandardItem
 
 from gedtidy.models.normalization_model import NormalizationModel
 from gedtidy.ui.steps.step2_normalize_ui import Ui_Step2_NormalizeUI
+
+
+# ---------------------------------------------------------
+# Eigene Proxy-Klasse für Option A
+# ---------------------------------------------------------
+class NormProxy(QSortFilterProxyModel):
+    """
+    Proxy für die mittlere Tabelle:
+    - Filter bleibt aktiv
+    - current_norm wird IMMER angezeigt, auch wenn er nicht zum Filter passt
+    """
+
+    def __init__(self, model_ref, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.model_ref = model_ref  # Zugriff auf current_norm
+
+    def filterAcceptsRow(self, source_row, source_parent):
+        idx = self.sourceModel().index(source_row, 0)
+        pure = self.sourceModel().data(idx, Qt.UserRole)
+
+        # aktueller Normwert → immer anzeigen
+        if pure == self.model_ref.current_norm:
+            return True
+
+        # sonst normal filtern
+        return super().filterAcceptsRow(source_row, source_parent)
+
 
 
 class Step2_Normalize(QWidget):
@@ -17,6 +44,8 @@ class Step2_Normalize(QWidget):
 
         self.model = model
         self._suppress_norm_edit = False
+        self._last_unfiltered_norm = None
+
 
         # Designer-UI laden
         self.ui = Ui_Step2_NormalizeUI()
@@ -48,7 +77,6 @@ class Step2_Normalize(QWidget):
 
         self.model_left.itemChanged.connect(self.on_left_item_changed)
 
-        # self.table_left.setFocusPolicy(Qt.NoFocus)
         self.table_left.setStyleSheet("""
             QTableView::item:selected {
                 background: transparent;
@@ -56,15 +84,18 @@ class Step2_Normalize(QWidget):
             }
         """)
 
-
         # ---------------------------------------------------------
         # Mittlere Tabelle (Normwerte)
         # ---------------------------------------------------------
         self.table_norm = self.ui.table_norm
         self.model_norm = QStandardItemModel(self)
-        self.proxy_norm = QSortFilterProxyModel(self)
+
+        # Proxy mit Sonderlogik (Option A)
+        self.proxy_norm = NormProxy(self.model)
         self.proxy_norm.setSourceModel(self.model_norm)
         self.proxy_norm.setSortCaseSensitivity(Qt.CaseInsensitive)
+        self.proxy_norm.setSortRole(Qt.UserRole)
+        self.proxy_norm.setDynamicSortFilter(True)
 
         self.table_norm.setModel(self.proxy_norm)
         self._init_norm_header()
@@ -79,14 +110,6 @@ class Step2_Normalize(QWidget):
         header.resizeSection(0, 270)
         header.resizeSection(1, 40)
         header.resizeSection(2, 40)
-
-        # self.table_left.setFocusPolicy(Qt.NoFocus)
-        self.table_left.setStyleSheet("""
-            QTableView::item:selected {
-                background: transparent;
-                color: black;
-            }
-        """)
 
         # ---------------------------------------------------------
         # Rechte Tabelle (Details)
@@ -108,14 +131,6 @@ class Step2_Normalize(QWidget):
         header.resizeSection(0, 300)
         header.resizeSection(1, 40)
 
-        # self.table_left.setFocusPolicy(Qt.NoFocus)
-        self.table_left.setStyleSheet("""
-            QTableView::item:selected {
-                background: transparent;
-                color: black;
-            }
-        """)
-
         # Filter
         self.filter_left = self.ui.filter_left
         self.filter_norm = self.ui.filter_norm
@@ -127,22 +142,42 @@ class Step2_Normalize(QWidget):
         self.btn_delete_norm_list = self.ui.btn_delete_norm_list
         self.btn_delete_details = self.ui.btn_delete_details
 
+        # Sortierung initial setzen
+        self.table_left.sortByColumn(1, Qt.AscendingOrder)
+        self.table_norm.sortByColumn(0, Qt.AscendingOrder)
+        self.table_details.sortByColumn(0, Qt.AscendingOrder)
+
         # Signale verbinden
         self._connect_signals()
 
         # Initiales Rendering
         self.refresh_all()
 
+    
+    # ---------------------------------------------------------
+    # Hilfsfunktionen   Status, Beep, etc.
+    # ---------------------------------------------------------
+    def _show_status(self, text):
+        win = self.window()
+        try:
+            bar = win.statusBar()   # <-- WICHTIG: Methode aufrufen!
+            bar.showMessage(text, 15000)
+        except Exception as e:
+            print("[STATUS]", text)
+
+
+    def _beep(self):
+        QApplication.beep()
+
+    
     # ---------------------------------------------------------
     # SIGNALVERBINDUNGEN
     # ---------------------------------------------------------
     def _connect_signals(self):
-        # Filter
         self.filter_left.textChanged.connect(self.on_filter_left)
         self.filter_norm.textChanged.connect(self.on_filter_norm)
         self.filter_details.textChanged.connect(self.on_filter_details)
 
-        # Tabellen
         self.table_left.doubleClicked.connect(self.on_left_doubleclick)
         self.table_left.clicked.connect(self.on_left_cell_clicked)
 
@@ -153,12 +188,10 @@ class Step2_Normalize(QWidget):
 
         self.table_details.doubleClicked.connect(self.on_details_doubleclick)
 
-        # Sortierung
         self.table_left.setSortingEnabled(True)
         self.table_norm.setSortingEnabled(True)
         self.table_details.setSortingEnabled(True)
 
-        # Buttons
         self.btn_assign.clicked.connect(self.assign_selected)
         self.btn_delete_single_norm.clicked.connect(self.delete_single_norm)
         self.btn_delete_norm_list.clicked.connect(self.delete_all_norms)
@@ -195,13 +228,14 @@ class Step2_Normalize(QWidget):
 
         proxy_row = self.table_left.currentIndex().row()
 
+        self.proxy_left.sort(1, Qt.AscendingOrder)
+
         self.table_left.setSortingEnabled(False)
         self.model_left.setRowCount(0)
 
         for item in items:
             row_items = []
 
-            # Spalte 0: Checkbox
             chk_item = QStandardItem()
             chk_item.setCheckable(True)
             chk_item.setFlags(chk_item.flags() & ~Qt.ItemIsEditable)
@@ -209,19 +243,16 @@ class Step2_Normalize(QWidget):
             chk_item.setData(item["tag"], Qt.UserRole)
             row_items.append(chk_item)
 
-            # Spalte 1: TAG-Wert
             tag_item = QStandardItem(f"• {item['tag']}")
             tag_item.setData(item["tag"], Qt.UserRole)
             tag_item.setFlags(tag_item.flags() & ~Qt.ItemIsEditable)
             row_items.append(tag_item)
 
-            # Spalte 2: Anzahl
             count_item = QStandardItem(str(item["count"]))
             count_item.setData(item["count"], Qt.EditRole)
             count_item.setFlags(count_item.flags() & ~Qt.ItemIsEditable)
             row_items.append(count_item)
 
-            # Spalte 3: Normwert-Markierung
             norm_item = QStandardItem("🔖" if item["norm_value"] is None else "")
             norm_item.setTextAlignment(Qt.AlignCenter)
             norm_item.setFlags(norm_item.flags() & ~Qt.ItemIsEditable)
@@ -247,6 +278,16 @@ class Step2_Normalize(QWidget):
     # ---------------------------------------------------------
     def refresh_norm(self):
         norms = self.model.get_norm_values()
+
+        # merken, ob der vorherige unpassende Normwert verschwunden ist
+        if self._last_unfiltered_norm:
+            still_present = any(n["norm"] == self._last_unfiltered_norm for n in norms)
+            if not still_present:
+                self._show_status(
+                    f"Normwert „{self._last_unfiltered_norm}“ wurde ausgeblendet (entspricht nicht dem Filter)."
+                )
+                self._beep()
+                self._last_unfiltered_norm = None
 
         self.table_norm.setSortingEnabled(False)
         self.model_norm.setRowCount(0)
@@ -281,15 +322,15 @@ class Step2_Normalize(QWidget):
             self.model_norm.appendRow(row_items)
 
         self.table_norm.setSortingEnabled(True)
+        self.proxy_norm.sort(0, Qt.AscendingOrder)
 
-        # Auswahl / current_norm nach Filter / Änderungen
         row_count = self.model_norm.rowCount()
         if row_count == 0:
             self.model.current_norm = None
             self.refresh_details()
             return
 
-        # Versuchen, current_norm wiederzufinden
+        # current_norm wiederfinden
         found_row = None
         for row in range(row_count):
             item = self.model_norm.item(row, 0)
@@ -305,12 +346,26 @@ class Step2_Normalize(QWidget):
             proxy_index = self.proxy_norm.mapFromSource(source_index)
             self.table_norm.setCurrentIndex(proxy_index)
         else:
-            # ersten Eintrag aktiv setzen
             source_index = self.model_norm.index(0, 0)
             proxy_index = self.proxy_norm.mapFromSource(source_index)
             self.table_norm.setCurrentIndex(proxy_index)
             new_norm = self.model_norm.item(0, 0).data(Qt.UserRole)
             self.model.select_norm(new_norm)
+
+        # ---------------------------------------------
+        # neuen Zustand merken (unpassender Normwert)
+        # ---------------------------------------------
+        cn = self.model.current_norm
+        if cn and not self.model._matches_filter(cn, self.model.filter_norm):
+            # unpassender Normwert wird angezeigt → melden
+            if self._last_unfiltered_norm != cn:
+                self._show_status(
+                    f"Normwert „{cn}“ passt nicht zum Filter und wird temporär angezeigt."
+                )
+                self._beep()
+            self._last_unfiltered_norm = cn
+        else:
+            self._last_unfiltered_norm = None
 
         self.refresh_details()
 
@@ -340,6 +395,7 @@ class Step2_Normalize(QWidget):
             self.model_details.appendRow(row_items)
 
         self.table_details.setSortingEnabled(True)
+        self.proxy_details.sort(0, Qt.AscendingOrder)
 
         if self.model_details.rowCount() > 0:
             if proxy_row < 0:
@@ -409,10 +465,7 @@ class Step2_Normalize(QWidget):
         if not index.isValid():
             return
 
-        # index ist ein Proxy-Index → auf Spalte 0 umbiegen
         proxy_index = index.sibling(index.row(), 0)
-
-        # Proxy → Source mappen
         source_index = self.proxy_norm.mapToSource(proxy_index)
         if not source_index.isValid():
             return
@@ -452,7 +505,6 @@ class Step2_Normalize(QWidget):
         self.table_norm.setCurrentIndex(current)
         self.refresh_details()
 
-        # Hervorhebung aktualisieren
         for row in range(self.model_norm.rowCount()):
             it = self.model_norm.item(row, 0)
             if it is None:
@@ -523,6 +575,7 @@ class Step2_Normalize(QWidget):
         tag = item.data(Qt.UserRole)
         self.model.remove_detail(tag)
         self.refresh_all()
+
 
     # ---------------------------------------------------------
     # LÖSCH-BUTTONS
@@ -649,10 +702,9 @@ class Step2_Normalize(QWidget):
         if model_item:
             model_item["is_selected"] = checked
 
-
     # ---------------------------------------------------------
     # REFRESH-METHODEN
     # ---------------------------------------------------------
     def refresh(self):
         """UI neu aufbauen, nachdem das Model geändert wurde."""
-        self.refresh_all()  
+        self.refresh_all()            

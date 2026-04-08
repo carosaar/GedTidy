@@ -123,6 +123,9 @@ Ein Klick auf einen Button wechselt den Arbeitsbereich zum entsprechenden Schrit
 - **Rohdaten**  
   - Spalten: „Zeile“, „Pointer“, „Wert“  
 
+Nach Abschluss der Extraktion erscheint eine Statusmeldung („Extraktion abgeschlossen.“),  
+die automatisch nach einigen Sekunden ausgeblendet wird.
+
 ---
 
 ## 5. Schritt 2 – Normierung
@@ -160,6 +163,16 @@ Ein Klick auf einen Button wechselt den Arbeitsbereich zum entsprechenden Schrit
 
 **Doppelklick** auf einen Tag-Wert links ordnet diesen Wert direkt dem aktuellen Normwert zu
 
+### 5.4 Verhalten bei aktivem Filter der Normwert-Tabelle (Mitte)
+
+Wenn ein Normwert ausgewählt oder neu angelegt wird, der nicht zum aktuellen Filter passt, bleibt er dennoch sichtbar.  
+Dies erleichtert die Kontrolle der Zuordnung.
+
+Sobald ein anderer Normwert ausgewählt oder eine neue Zuordnung vorgenommen wird, verschwindet der zuvor sichtbare, aber nicht passende Normwert wieder aus der Liste.
+
+GedTidy informiert über dieses Verhalten durch:
+- eine Statusmeldung in der Statusleiste  
+- einen kurzen Systemton  
 ---
 
 ## 6. Schritt 3 – Bereinigte Datei erzeugen
@@ -222,6 +235,9 @@ ber das Menü **Datei**:
 
 - **Arbeitsstand laden**  
   - lädt einen zuvor gespeicherten Zustand (Normwerte, Einstellungen, Zuordnungen)  
+    Nach dem Laden oder Verwerfen eines Arbeitsstands zeigt GedTidy eine Statusmeldung an  
+    (z. B. „Import erfolgreich übernommen.“ oder „Import abgebrochen.“).  
+    Diese Meldungen verschwinden automatisch nach einigen Sekunden.
 - **Arbeitsstand speichern**  
   - speichert den aktuellen Zustand  
 - **Beenden**  

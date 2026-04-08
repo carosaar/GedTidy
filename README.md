@@ -18,6 +18,7 @@ Ohne ein grundlegendes Verständnis der GEDCOM‑Struktur können Analyseergebni
 - Moderne, klare graphische Benutzeroberfläche  
 - Vollständig lokale Verarbeitung – **keine Datenübertragung**  
 - Windows‑Installer/Deinstaller inklusive Desktop‑Verknüpfung
+- Kontextabhängige Statusmeldungen und akustische Hinweise während der Normierung
 
 ## 📖 Benutzerhandbuch und Testumgebung
 Das vollständige Benutzerhandbuch befindet sich im Ordner [`doc/`](doc/).  

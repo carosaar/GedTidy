@@ -109,11 +109,17 @@ class MainWindow(QMainWindow):
     # ---------------------------------------------------------
     # Statusmeldung
     # ---------------------------------------------------------
-    def update_status(self, msg: str):
+    def update_status(self, msg: str, timeout: int = 10000):
         """
-        Wird von Step1 / StepController aufgerufen, um eine Statusmeldung
-        in der Statusleiste anzuzeigen.
+        Zeigt eine Statusmeldung in der Statusleiste an.
+        Meldungen verschwinden nach 'timeout' Millisekunden.
+        Default: 10 Sekunden.
         """
         if self._suppress_status:
             return
-        self.statusBar().showMessage(msg)
+
+        try:
+            # WICHTIG: statusBar() aufrufen, nicht statusBar
+            self.statusBar().showMessage(msg, timeout)
+        except Exception:
+            print("[STATUS]", msg)
