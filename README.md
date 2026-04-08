@@ -92,8 +92,6 @@ Typische Meldungen:
 
 ## 📁 Projektstruktur
 
-Die folgenden Ordner gehören ins GitHub‑Repository:
-
 ```
 GedTidy/
 ├── assets/               # Icons und statische Ressourcen
