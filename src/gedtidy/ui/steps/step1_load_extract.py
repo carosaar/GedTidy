@@ -35,6 +35,11 @@ class Step1_LoadAndExtract(QWidget):
         # Designer-UI laden
         self.ui = Ui_Step1_LoadAndExtract()
         self.ui.setupUi(self)
+        self.ui.combo_tags.clear()
+        self.ui.combo_tags.addItems(SEARCH_TAGS)
+        self.ui.combo_tags.setCurrentText("PLAC")
+        self.ui.edit_filter.setClearButtonEnabled(True)
+
 
         # Daten
         self.rohdaten = []

@@ -2,6 +2,28 @@
 
 ## [Unreleased]
 
+## [1.0.2] – 2026‑04‑09
+
+### Geändert
+- Menüstruktur überarbeitet:
+  - Menü „Datei“ in „Arbeitsstand“ umbenannt.
+  - „Info“ und „Beenden“ als eigene Menüs auf oberster Ebene.
+  - Filterfelder für alle drei Tabellen mit Clear-Buttons.
+  - Default-Name beim Export des Arbeitsstandes: <myged>_<TAG>.tidy
+- Step 1 (Load & Extract):
+  - TAG-Auswahl und aktuelle Einstellungen (TAG, Modus, Separator) mit Standardwerten gefüllt (TAG=`PLAC`, Modus=`Gesamt`).
+  Step 2 (Normalize):
+  - Drei-Tabellen-Layout mit stabiler Filter- und Sortierlogik.
+  - Neue Proxy-Klasse `NormProxy`, die den aktuellen Normwert auch bei aktivem Filter sichtbar hält.
+  - Statusmeldungen und optionaler Beep, wenn Normwerte durch Filterlogik ausgeblendet oder temporär angezeigt werden.
+- Step 3 (Write Output):
+  - Ersetzungstabelle wird beim Öffnen von Step 3 automatisch nach Normwert (Spalte 0) sortiert.
+
+### Behoben
+- "Verschwinden" von Normwerten bei Filterung beseitigt.
+
+
+
 ## [1.0.1] – 2026‑04‑08
 ### Geändert
 - Statusmeldungen im gesamten Programm vereinheitlicht  

@@ -137,13 +137,16 @@ class StepController(QStackedWidget):
         }
 
         
-        # Basisname der GEDCOM-Datei ermitteln
+        # Basisname der GEDCOM-Datei ermitteln und Standardname für Arbeitsstand vorschlagen
         ged_path = self.step1.ui.edit_file.text().strip()
+        tag = self.step1.current_tag or "TAG"
+
         if ged_path:
             base = os.path.splitext(os.path.basename(ged_path))[0]
-            default_path = os.path.join(os.path.dirname(ged_path), base + ".tidy")
+            default_name = f"{base}_{tag}.tidy"   #<-- z.B. "meine_stammbaumdatei_PLAC.tidy"
+            default_path = os.path.join(os.path.dirname(ged_path), default_name)
         else:
-            default_path = "arbeitsstand.tidy"
+            default_path = f"arbeitsstand_{tag}.tidy"    
 
         path, _ = QFileDialog.getSaveFileName(
             None,

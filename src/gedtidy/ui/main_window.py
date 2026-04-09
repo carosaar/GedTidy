@@ -63,11 +63,6 @@ class MainWindow(QMainWindow):
             lambda: self.step_controller.export_state()
         )
 
-        # Speichern unter... (kannst du später entfernen, wenn immer Dialog)
-        self.ui.action_save_state_as.triggered.connect(
-            lambda: self.step_controller.export_state(save_as=True)
-        )
-
         # Info
         self.ui.action_info.triggered.connect(self.show_info_dialog)
 

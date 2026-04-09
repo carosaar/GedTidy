@@ -24,8 +24,11 @@ class Step3_WriteOutput(QWidget):
                  separator, single_value_mode, parent=None):
         super().__init__(parent)
 
+               
         self.ui = Ui_Step3_WriteOutput()
         self.ui.setupUi(self)
+        self.ui.edit_filter_replacements.setClearButtonEnabled(True)
+
 
         # Daten aus Step 1 + Step 2
         self.model = model
@@ -55,6 +58,10 @@ class Step3_WriteOutput(QWidget):
         self.configure_table()
         self.fill_replacements_table()
         self._update_filtered_sum_label()
+
+    # ------------------------------------------------------------
+    # TABELLENKONFIGURATION
+    # ------------------------------------------------------------
 
     def configure_table(self):
         table = self.ui.table_replacements
@@ -86,6 +93,8 @@ class Step3_WriteOutput(QWidget):
         table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
 
         table.setSortingEnabled(True)
+        table.sortByColumn(0, Qt.AscendingOrder)
+
 
     # ------------------------------------------------------------
     # SIGNALVERBINDUNGEN
@@ -124,6 +133,7 @@ class Step3_WriteOutput(QWidget):
 
         table.setSortingEnabled(False)
         table.setRowCount(0)
+        
 
         replacements = self.model.get_replacement_list()
 

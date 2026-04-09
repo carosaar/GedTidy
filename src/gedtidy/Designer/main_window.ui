@@ -13,6 +13,7 @@
   <property name="windowTitle">
    <string>GedTidy – Prototyp</string>
   </property>
+
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
@@ -23,6 +24,8 @@
     </item>
    </layout>
   </widget>
+
+  <!-- MENÜLEISTE -->
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
@@ -32,49 +35,64 @@
      <height>33</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
+
+   <!-- MENÜ: ARBEITSSTAND -->
+   <widget class="QMenu" name="menuArbeitsstand">
     <property name="title">
-     <string>Datei</string>
+     <string>Arbeitsstand</string>
     </property>
     <addaction name="action_load_state"/>
     <addaction name="action_save_state"/>
-    <addaction name="separator"/>
+   </widget>
+
+   <!-- MENÜ: INFO -->
+   <widget class="QMenu" name="menuInfo">
+    <property name="title">
+     <string>Info</string>
+    </property>
     <addaction name="action_info"/>
+   </widget>
+
+   <!-- MENÜ: BEENDEN -->
+   <widget class="QMenu" name="menuBeenden">
+    <property name="title">
+     <string>Beenden</string>
+    </property>
     <addaction name="action_exit"/>
    </widget>
-   <addaction name="menuFile"/>
+
+   <addaction name="menuArbeitsstand"/>
+   <addaction name="menuInfo"/>
+   <addaction name="menuBeenden"/>
   </widget>
+
   <widget class="QStatusBar" name="statusBar"/>
+
+  <!-- ACTIONS -->
   <action name="action_load_state">
    <property name="text">
-    <string>Arbeitsstand laden</string>
+    <string>Laden</string>
    </property>
   </action>
+
   <action name="action_save_state">
    <property name="text">
-    <string>Arbeitsstand speichern</string>
+    <string>Speichern</string>
    </property>
   </action>
-  <action name="action_save_state_as">
-   <property name="text">
-    <string>Speichern unter...</string>
-   </property>
-  </action>
+
   <action name="action_info">
    <property name="text">
     <string>Info</string>
    </property>
   </action>
+
   <action name="action_exit">
    <property name="text">
     <string>Beenden</string>
    </property>
   </action>
-  <action name="separator">
-   <property name="separator" stdset="0">
-    <bool>true</bool>
-   </property>
-  </action>
+
  </widget>
  <resources/>
  <connections/>

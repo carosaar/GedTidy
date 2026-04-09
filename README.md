@@ -14,11 +14,16 @@ Ohne ein grundlegendes Verständnis der GEDCOM‑Struktur können Analyseergebni
 ## 🚀 Funktionen
 
 - Öffnen und Analysieren von GEDCOM‑Dateien  
-- Normalisierung bestimmter Werte (z.B. Ortsangaben)  
+- Normalisierung bestimmter TAG-Werte (z.B. Ortsangaben)  
 - Moderne, klare graphische Benutzeroberfläche  
 - Vollständig lokale Verarbeitung – **keine Datenübertragung**  
 - Windows‑Installer/Deinstaller inklusive Desktop‑Verknüpfung
 - Kontextabhängige Statusmeldungen und akustische Hinweise während der Normierung
+- Stabile Filter‑ und Sortierlogik in allen Tabellen
+- Normwerte der Normierungsttabelle (Normierung mittlere Tabelle) bleiben auch bei aktivem Filter sichtbar
+- Automatische Sortierung der Ersetzungstabelle beim Schreiben der GEDCOM‑Datei
+- Speichern und Laden von Arbeitsständen unter `<myged>_<TAG>.tidy` (Vorgabename kann geändert werden)
+
 
 ## 📖 Benutzerhandbuch und Testumgebung
 Das vollständige Benutzerhandbuch befindet sich im Ordner [`doc/`](doc/).  

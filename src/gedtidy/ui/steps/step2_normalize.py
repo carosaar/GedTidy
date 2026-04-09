@@ -136,6 +136,11 @@ class Step2_Normalize(QWidget):
         self.filter_norm = self.ui.filter_norm
         self.filter_details = self.ui.filter_details
 
+        # Clear-Buttons für Filter aktivieren
+        self.filter_left.setClearButtonEnabled(True)
+        self.filter_norm.setClearButtonEnabled(True)
+        self.filter_details.setClearButtonEnabled(True)
+
         # Buttons
         self.btn_assign = self.ui.btn_assign
         self.btn_delete_single_norm = self.ui.btn_delete_single_norm
@@ -272,6 +277,8 @@ class Step2_Normalize(QWidget):
 
         index = self.proxy_left.index(proxy_row, 0)
         self.table_left.setCurrentIndex(index)
+        self.table_left.scrollTo(index, QAbstractItemView.PositionAtCenter)
+
 
     # ---------------------------------------------------------
     # MITTLERE TABELLE
@@ -345,6 +352,8 @@ class Step2_Normalize(QWidget):
             source_index = self.model_norm.index(found_row, 0)
             proxy_index = self.proxy_norm.mapFromSource(source_index)
             self.table_norm.setCurrentIndex(proxy_index)
+            self.table_norm.scrollTo(proxy_index, QAbstractItemView.PositionAtCenter)
+
         else:
             source_index = self.model_norm.index(0, 0)
             proxy_index = self.proxy_norm.mapFromSource(source_index)
@@ -405,6 +414,7 @@ class Step2_Normalize(QWidget):
 
             index = self.proxy_details.index(proxy_row, 0)
             self.table_details.setCurrentIndex(index)
+            self.table_details.scrollTo(index, QAbstractItemView.PositionAtCenter)
 
     # ---------------------------------------------------------
     # AKTIONEN

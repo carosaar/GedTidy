@@ -1,4 +1,4 @@
-# GedTidy – Benutzerhandbuch
+# GedTidy – Benutzerhandbuch 1.0.2
 
 ## 1. Überblick
 
@@ -92,9 +92,14 @@ Ein Klick auf einen Button wechselt den Arbeitsbereich zum entsprechenden Schrit
 
 - GEDCOM‑Datei auswählen  
 - TAG auswählen (z. B. `PLAC`, `OCCU`)  
+  Der zu untersuchende TAG wird beim Start automatisch mit `PLAC` vorgegeben.
+- Modus „Einzelwerte extrahieren“ und Trenner festlegen
+  Der Modus startet standardmäßig im Gesamtmodus (der gesamte Wert des TAG wird normiert) 
+  Einzelmodus kann aktiviert werden: Die TAG-Werte werden einzeln normiert (der Trenner kann festgelegt werden).
 - Werte extrahieren  
-- gruppierte und rohe Werte ansehen  
-- Filter anwenden  
+- Tabellen `gruppierte TAG-Werten` und `Rohdaten` (wie sie aus der ged-Datei gelesen wurden mit ged-Datei-Zeilennummer
+  und Datensatz-Zeiger  
+- Tabellenfilter anwenden  
 
 ### 4.2 Bedienelemente
 
@@ -154,6 +159,9 @@ die automatisch nach einigen Sekunden ausgeblendet wird.
   - Filterfeld „Filter…“  
   - Button: **Detailwerte löschen**  
 
+Die Tabellen verfügen über eine stabile Sortierlogik, die auch bei Filterung und Navigation erhalten bleibt.
+
+
 ### 5.3 Zuordnen von Werten
 
 - Auswahl eines oder mehrerer Tag-Wert links  
@@ -172,7 +180,10 @@ Sobald ein anderer Normwert ausgewählt oder eine neue Zuordnung vorgenommen wir
 
 GedTidy informiert über dieses Verhalten durch:
 - eine Statusmeldung in der Statusleiste  
-- einen kurzen Systemton  
+- Normwerte, die nicht zum Filter passen, aber aktuell ausgewählt sind, bleiben sichtbar.
+- Beim Ein‑ oder Ausblenden eines Normwerts zeigt GedTidy eine Statusmeldung und gibt einen kurzen Systemton aus.
+- Alle drei Tabellen (links, Mitte, rechts) besitzen jetzt Filterfelder mit Clear‑Button, um Filter schnell zurückzusetzen.
+
 ---
 
 ## 6. Schritt 3 – Bereinigte Datei erzeugen
@@ -209,6 +220,7 @@ Im oberen Bereich (Frame „Vorgaben / Statistik / Normierung“):
   - Anzeige:
     - „Anzahl (gefiltert): …“  
     - „Ersetzungen (gefiltert): …“  
+  - Die Tabelle wird beim Öffnen von Schritt 3 automatisch nach `Normwert (neu)` sortiert.
 
 ### 6.4 Protokoll
 
