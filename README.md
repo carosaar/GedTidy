@@ -119,7 +119,7 @@ GedTidy/
 ```
 
 *Anmerkung:*
-`rootlauncher.py` dient als Startskript (Wrapper) für den Entwicklungsmodus und ermöglicht den direkten Aufruf der Anwendung über `python rootlauncher.py`. 
+`rootlauncher.py` dient als Startskript (Wrapper) für den Entwicklungsmodus und ermöglicht den direkten Aufruf der Anwendung über `python rootlauncher.py`.
 
 ---
 
@@ -136,6 +136,25 @@ pip install -r requirements.txt
 
 ---
 
+### 📦 Paketinstallation
+
+Das Projekt kann als Python-Paket installiert werden, damit `gedtidy` im Paketkontext verfügbar ist:
+
+```bash
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -e .
+```
+
+Anschließend lässt sich die Anwendung auch über das Modul starten:
+
+```bash
+python -m gedtidy
+```
+
+Dieser Weg stellt sicher, dass das Paket `gedtidy` im Python-Importpfad vorhanden ist und ermöglicht die Nutzung von rootlauncher.py sowie modulares Entwickeln.
+
+---
+
 ### Start im Entwicklungsmodus
 
 ```bash
@@ -146,6 +165,12 @@ oder
 
 ```bash
 python rootlauncher.py
+```
+
+oder
+
+```bash
+python -m gedtidy
 ```
 
 ---
