@@ -114,12 +114,13 @@ GedTidy/
 ├── requirements.txt
 ├── rootlauncher.py       # Startscript für den Entwicklungsmodus
 ├── LICENSE
-├── pyproject.toml
+├── pyproject.toml        # Paket‑ und Build‑Konfiguration 
 └── README.md
 ```
 
-*Anmerkung:*
-`rootlauncher.py` dient als Startskript (Wrapper) für den Entwicklungsmodus und ermöglicht den direkten Aufruf der Anwendung über `python rootlauncher.py`.
+*Anmerkungen:*
+- `rootlauncher.py` dient als Startskript für den Entwicklungsmodus und ermöglicht den direkten Aufruf der Anwendung über `python rootlauncher.py`.
+- Die Paketversion 0.1.0 in `pyproject.toml` dient nur der Python‑Packaging‑Struktur und ist unabhängig von der Anwendungs‑Version (APP_VERSION).
 
 ---
 
