@@ -26,8 +26,11 @@ Ein Eintrag besteht aus:
 Beispiel:
 
 ```text
-1 PLAC Saarbrücken, Saarland, Deutschland
-2 NOTE Herkunft unklar
+1 NAME Hans /Mustermann/
+1 BIRT 12 DEC 1812
+2 PLAC Saarbrücken, Saarland, Deutschland
+1 DEAT 12 JAN 1899
+2 PLAC Saarbr.
 ```
 
 Typische Probleme:
@@ -94,7 +97,7 @@ Ein Klick auf einen Button wechselt den Arbeitsbereich zum entsprechenden Schrit
 - TAG auswählen (z. B. `PLAC`, `OCCU`)  
   Der zu untersuchende TAG wird beim Start automatisch mit `PLAC` vorgegeben.
 - Modus „Einzelwerte extrahieren“ und Trenner festlegen
-  Der Modus startet standardmäßig im Gesamtmodus (der gesamte Wert des TAG wird normiert) 
+  Der Modus startet standardmäßig im Gesamtmodus (der gesamte Wert des TAG wird normiert)
   Einzelmodus kann aktiviert werden: Die TAG-Werte werden einzeln normiert (der Trenner kann festgelegt werden).
 - Werte extrahieren  
 - Tabellen `gruppierte TAG-Werten` und `Rohdaten` (wie sie aus der ged-Datei gelesen wurden mit ged-Datei-Zeilennummer
@@ -161,12 +164,11 @@ die automatisch nach einigen Sekunden ausgeblendet wird.
 
 Die Tabellen verfügen über eine stabile Sortierlogik, die auch bei Filterung und Navigation erhalten bleibt.
 
-
 ### 5.3 Zuordnen von Werten
 
 - Auswahl eines oder mehrerer Tag-Wert links  
 - Auswahl eines Normwerts in der Mitte oder Anlegen eines neuen (je nach Implementierung)  
-- Klick auf **»** 
+- Klick auf **»**
 - Die Werte werden dem Normwert zugeordnet und erscheinen im rechten Bereich.
 
 **Doppelklick** auf einen Tag-Wert links ordnet diesen Wert direkt dem aktuellen Normwert zu
@@ -179,7 +181,7 @@ Dies erleichtert die Kontrolle der Zuordnung.
 Sobald ein anderer Normwert ausgewählt oder eine neue Zuordnung vorgenommen wird, verschwindet der zuvor sichtbare, aber nicht passende Normwert wieder aus der Liste.
 
 GedTidy informiert über dieses Verhalten durch:
-- eine Statusmeldung in der Statusleiste  
+- eine Statusmeldung in der Statusleiste
 - Normwerte, die nicht zum Filter passen, aber aktuell ausgewählt sind, bleiben sichtbar.
 - Beim Ein‑ oder Ausblenden eines Normwerts zeigt GedTidy eine Statusmeldung und gibt einen kurzen Systemton aus.
 - Alle drei Tabellen (links, Mitte, rechts) besitzen jetzt Filterfelder mit Clear‑Button, um Filter schnell zurückzusetzen.
@@ -189,6 +191,7 @@ GedTidy informiert über dieses Verhalten durch:
 ## 6. Schritt 3 – Bereinigte Datei erzeugen
 
 ![alt text](screenshot/Schritt3-Prüfung_und_BereinigteDateiErzeugen.png)
+
 ### 6.1 Ziel
 
 - Ersetzungstabelle prüfen  
