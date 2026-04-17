@@ -109,11 +109,12 @@ Ein Klick auf einen Button wechselt den Arbeitsbereich zum entsprechenden Schrit
 - **Datei…**  
   - öffnet einen Dateidialog zur Auswahl der GEDCOM‑Datei  
 - **TAG‑Auswahl (ComboBox „TAG:“)**  
-  - zeigt alle in der Datei vorkommenden TAGs  
+  - zeigt eine Liste aller TAGs, die das Programm (derzeit) normalisieren kann:
+    `PLAC, OCCU, RELI, CAUS, TYPE`
 - **Einzelwerte extrahieren**  
-  - trennt Mehrfachwerte anhand des angegebenen Trenners  
-- **Trenner (LineEdit „Trenner:“)**  
-  - z. B. `, ` oder `;`  
+  - trennt Mehrfachwerte (z.B. `Ackerer, Schuster, Bergmann`) anhand des angegebenen Trenners  
+- **Trenner**  
+  - z. B. `, `,  `;`  oder freier Text z.B. `und` 
 - **🔍 Extrahieren**  
   - startet die Analyse und Extraktion  
 - **🔄 Reset**  
